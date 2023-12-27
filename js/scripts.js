@@ -1,7 +1,7 @@
 let pokemonList = [
   {
     name: "Pikachu",
-    height: 0.8,
+    height: 0.5,
     type: "Electric",
     species: "Mouse",
     abilities: "Static",
@@ -24,9 +24,9 @@ let pokemonList = [
 
 for (let i = 0; i < pokemonList.length; i++)
 if (pokemonList[i].height > .5) {
-  document.write(pokemonList[i].name + ": " + pokemonList[i].height + " Wow, that's big!");
+  document.write("<p>" + pokemonList[i].name + ": " + pokemonList[i].height + " Wow, that's big!" + "</p>");
 } else {
-  document.write(pokemonList[i].name + ": " + pokemonList[i].height);
+  document.write("<p>" + pokemonList[i].name + ": " + pokemonList[i].height) + "</p>";
 }
 
 
