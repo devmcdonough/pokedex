@@ -20,8 +20,38 @@ let pokemonList = [
     species: "Hairy Bug",
     abilities: "Shield Dust",
   }
+];
 
-]
+for (let i = 0; i < pokemonList.length; i++)
+if (pokemonList[i].height > .5) {
+  document.write(pokemonList[i].name + ": " + pokemonList[i].height + " Wow, that's big!");
+} else {
+  document.write(pokemonList[i] + ": " + pokemonList[i].height);
+}
 
+
+  
+
+
+    //let condition = true;
+    //let condition = 1 >= 1;
+    // let condition = 1 >= 2;
+    // let condition = 1 != 2;
+    // let condition = null;
+    // let condition = false && '';
+    // let condition = false && 'Hello World!';
+    // let condition = null || false;
+    // let condition = false || 42;
+    // let condition = (42 >= (2 + 40)) && (false || 'Hello World');
+    //* let condition = true && ' ';
+
+    //if(condition){
+    //console.log('The result is true:', condition)
+    //}else{
+    //console.log('The result is false:', condition)
+    //}
+
+    
+    
 
 
