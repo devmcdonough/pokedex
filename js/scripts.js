@@ -1,7 +1,7 @@
 let pokemonList = [
   {
     name: "Pikachu",
-    height: 0.4,
+    height: 0.8,
     type: "Electric",
     species: "Mouse",
     abilities: "Static",
@@ -15,7 +15,7 @@ let pokemonList = [
   },
   {
     name: "Weedle",
-    height: 0.3,
+    height: 0.4,
     type: "Bug",
     species: "Hairy Bug",
     abilities: "Shield Dust",
@@ -26,7 +26,7 @@ for (let i = 0; i < pokemonList.length; i++)
 if (pokemonList[i].height > .5) {
   document.write(pokemonList[i].name + ": " + pokemonList[i].height + " Wow, that's big!");
 } else {
-  document.write(pokemonList[i] + ": " + pokemonList[i].height);
+  document.write(pokemonList[i].name + ": " + pokemonList[i].height);
 }
 
 
