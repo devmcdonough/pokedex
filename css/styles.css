@@ -1,0 +1,40 @@
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.container {
+    display: block;
+    margin: auto;
+    width: 20%;
+}
+
+.button-class {
+    background-color: #ffffff;
+    border: #3caf50 2px solid;
+    color: #3caf50;
+    padding: 16px 24px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 8px;
+    border-radius: 8px;
+}
+
+.button--red { background-color: tomato; }
+.button--green { background-color: lightgreen; }
+
+.button-class:hover {
+    background-color: #CFFFD7;
+}
+
+.dropdown {
+    border: #545454 2px solid;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+
+.pokemon-list {
+    list-style-type: none;
+}
