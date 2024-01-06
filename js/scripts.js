@@ -5,14 +5,14 @@ let pokemonRepository = (function () {
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
   function add(pokemon) {
-    // if (
+    if (
       typeof pokemon === "object" &&
       "name" in pokemon
-    // ) {
-    //   pokemonList.push(pokemon);
-    // } else {
-    //   console.log("pokemon is not correct");
-    // }
+    ) {
+      pokemonList.push(pokemon);
+    } else {
+      console.log("pokemon is not correct");
+    }
   }
   function getAll() {
     return pokemonList;
@@ -90,6 +90,8 @@ let pokemonRepository = (function () {
       });
     });
 
+
+    
     // console.log(pokemonRepository.getAll());
     // pokemonRepository.add({ name: 'Bulbasaur', height: 0.9 })
 
