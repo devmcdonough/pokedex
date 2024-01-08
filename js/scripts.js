@@ -26,43 +26,44 @@ let pokemonRepository = (function () {
   function showModal(title, text, img) {
     //clear existing modal content
     modalContainer.innerHTML = '';
-  
+
     //create modal
     let modal = document.createElement('div');
     modal.classList.add('modal');
-  
+
     //add new content to modal
     let closeButtonElement = document.createElement('button');
     closeButtonElement.classList.add('modal-close');
     closeButtonElement.innerText = 'Close';
     closeButtonElement.addEventListener('click', hideModal);
-  
+
     //Modal content
     let titleElement = document.createElement('h1');
     titleElement.innerText = title;
-  
+
     let contentElement = document.createElement('p');
-    contentElement.innertext = text;
-  
+    contentElement.innerText = text;
+
     let imgContainer = document.querySelector('#image-container');
     let imageElement = document.createElement('img');
+    imageElement.src = img;
 
     modal.appendChild(closeButtonElement);
     modal.appendChild(titleElement);
     imgContainer.appendChild(imageElement);
     modal.appendChild(contentElement);
     modalContainer.appendChild(modal);
-  
+
     modalContainer.classList.add('is-visible');
   }
-  
+
   function hideModal() {
     modalContainer.classList.remove('is-visible');
   }
-  
+
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && 
-    modalContainer.classList.contains('is-visible')) {
+    if (e.key === 'Escape' &&
+      modalContainer.classList.contains('is-visible')) {
       hideModal();
     }
   });
@@ -74,55 +75,89 @@ let pokemonRepository = (function () {
     }
   });
 
+  
+
+  function loadList() {
+    return fetch(apiUrl)
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error('Network response not OK');
+        }
+        return response.json();
+      })
+      .then(function (json) {
+        console.log('API Response', json);
+        return Promise.all(json.results.map(function (item) {
+          return loadDetails(item.url);
+          
+          
+         
+        }));
+      })
+      .then(function () {
+        console.log('All details loaded successfully');
+        pokemonRepository.getAll().forEach(function (pokemon) {
+          if (pokemon) {
+          addListItem(pokemon);
+          }
+        });
+      })
+      .catch(function (error) {
+        console.error('Error fetching data:', error);
+      })
+  }
+
   function addListItem(pokemon) {
-    let pokemonList = document.querySelector('.pokemon-list');
+    let pokemonListContainer = document.querySelector('.pokemon-list');
     let listItem = document.createElement("li");
     let button = document.createElement("button");
     button.innerText = pokemon.name;
     button.classList.add("button-class");
     listItem.appendChild(button);
-    pokemonList.appendChild(listItem);
+    pokemonListContainer.appendChild(listItem);
     button.addEventListener('click', function () {
+      if (pokemon.detailsUrl) {
       showDetails(pokemon);
+      } else {
+        console.error('Details URL not found for', pokemon.name);
+      }
     })
   }
 
-  function loadList() {
-    return fetch(apiUrl).then(function (response) {
-      return response.json();
-    }).then(function (json) {
-      json.results.forEach(function (item) {
+  function loadDetails(url) {
+    return fetch(url)
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error('Network response not OK');
+        }
+        return response.json();
+      })
+      .then(function (details) {
+        console.log('Pokemon Details', details);
+        if(!details.sprites || !details.sprites.front_default) {
+          console.error('Sprites not found', details.name);
+          return null;
+        }
+        // Now we add the details to the item
+        
         let pokemon = {
-          name: item.name,
-          detailsUrl: item.url,
-          img: item.image,
+          name: details.name,
+          detailsUrl: url,
+          imageUrl: details.sprites.front_default,
+          height: details.height,
+          types: details.types
         };
         add(pokemon);
+      })
+      .catch(function (error) {
+        console.error('Error fetching details', error);
       });
-    }).catch(function (e) {
-      console.error(e);
-    })
   }
 
-  function loadDetails(item) {
-    let url = item.detailsUrl;
-    return fetch(url).then(function (response) {
-      return response.json();
-    }).then(function (details) {
-      // Now we add the details to the item
-      item.img = details.sprites.front_default;
-      item.height = details.height;
-      item.types = details.types;
-    }).catch(function (e) {
-      console.error(e);
-    });
-  }
-
-  function showDetails(item) {
-    loadDetails(item).then(function () {
-      showModal(item);
-    });
-  }
+  function showDetails(pokemon) {
+      showModal(pokemon.name, `Height: ${pokemon.height}`, pokemon.imageUrl);
+    };
+  
 
   return {
     add: add,
