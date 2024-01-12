@@ -54,9 +54,10 @@ let pokemonRepository = (function () {
     modalBody.innerHTML = '';
     modalBody.innerText = text;
 
-
-    let imageElement = document.querySelector("#exampleModalCenter .modal-body");
+    let imageElement = document.createElement('img');
+    // let imageElement = document.querySelector("#exampleModalCenter .modal-body");
     imageElement.src = pokemonImage;
+    imageElement.classList.add('img-fluid');
     // imageElement.innerHTML = '';
 
     // modal.appendChild(closeButtonElement);
