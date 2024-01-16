@@ -6,7 +6,6 @@ let pokemonRepository = (function () {
 
   let modalContainer = document.querySelector('#modal-container');
 
-
   // This adds pokemon to the PokemonList if they are valid
   function add(pokemon) {
     if (
@@ -31,20 +30,14 @@ let pokemonRepository = (function () {
     pokemonTitle.innerHTML = '';
     pokemonTitle.innerText = title;
 
-
-
     //add new content to modal
     let closeButtonElement = document.createElement('button');
     closeButtonElement.classList.add('modal-close');
     closeButtonElement.innerText = 'Close';
     closeButtonElement.addEventListener('click', hideModal);
-
-    
+  
     //Modal content
     let modalBody = document.querySelector("#exampleModalCenter .modal-body");
-
-  
-
     modalBody.innerHTML = '';
     modalBody.innerText = text;
 
@@ -52,9 +45,6 @@ let pokemonRepository = (function () {
     imageElement.src = pokemonImage;
     imageElement.classList.add('img-fluid');
     modalBody.appendChild(imageElement);
-   
-
-
     modalContainer.classList.add('is-visible');
   }
 
@@ -76,8 +66,6 @@ let pokemonRepository = (function () {
     }
   });
 
-  
-
   function loadList() {
     return fetch(apiUrl)
       .then(function (response) {
@@ -89,10 +77,7 @@ let pokemonRepository = (function () {
       .then(function (json) {
         console.log('API Response', json);
         return Promise.all(json.results.map(function (item) {
-          return loadDetails(item.url);
-          
-          
-         
+          return loadDetails(item.url);      
         }));
       })
       .then(function () {
@@ -142,8 +127,8 @@ let pokemonRepository = (function () {
           console.error('Sprites not found', details.name);
           return null;
         }
-        // Now we add the details to the item
         
+        // Now we add the details to the item
         let pokemon = {
           name: details.name,
           detailsUrl: url,
@@ -162,7 +147,6 @@ let pokemonRepository = (function () {
     showModal(pokemon.name, `Height: ${pokemon.height}`, pokemon.imageUrl);
   }
   
-
   return {
     add: add,
     getAll: getAll,
@@ -174,7 +158,6 @@ let pokemonRepository = (function () {
 
 }
 )();
-
 
 pokemonRepository.loadList().then(function () {
   // Now the data is loaded!
