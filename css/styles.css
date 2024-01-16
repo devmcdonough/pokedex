@@ -4,9 +4,13 @@
 }
 
 .container {
+  margin-top: 120px;
   display: block;
-  margin: auto;
   width: 20%;
+}
+
+.nav-image {
+  justify-content: center;
 }
 
 .button-class {
