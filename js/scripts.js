@@ -1,11 +1,7 @@
 let pokemonRepository = (function () {
-
   let pokemonList = []
-
   const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
-
   let modalContainer = document.querySelector('#modal-container');
-
 
   // This adds pokemon to the PokemonList if they are valid
   function add(pokemon) {
@@ -14,9 +10,7 @@ let pokemonRepository = (function () {
       "name" in pokemon
     ) {
       pokemonList.push(pokemon);
-    } else {
-      console.log("pokemon is not correct");
-    }
+    } 
   }
 
   // Gets value of array
@@ -31,20 +25,14 @@ let pokemonRepository = (function () {
     pokemonTitle.innerHTML = '';
     pokemonTitle.innerText = title;
 
-
-
     //add new content to modal
     let closeButtonElement = document.createElement('button');
     closeButtonElement.classList.add('modal-close');
     closeButtonElement.innerText = 'Close';
     closeButtonElement.addEventListener('click', hideModal);
-
     
     //Modal content
     let modalBody = document.querySelector("#exampleModalCenter .modal-body");
-
-  
-
     modalBody.innerHTML = '';
     modalBody.innerText = text;
 
@@ -53,8 +41,6 @@ let pokemonRepository = (function () {
     imageElement.classList.add('img-fluid');
     modalBody.appendChild(imageElement);
    
-
-
     modalContainer.classList.add('is-visible');
   }
 
@@ -76,8 +62,6 @@ let pokemonRepository = (function () {
     }
   });
 
-  
-
   function loadList() {
     return fetch(apiUrl)
       .then(function (response) {
@@ -87,16 +71,11 @@ let pokemonRepository = (function () {
         return response.json();
       })
       .then(function (json) {
-        console.log('API Response', json);
         return Promise.all(json.results.map(function (item) {
-          return loadDetails(item.url);
-          
-          
-         
+          return loadDetails(item.url);     
         }));
       })
       .then(function () {
-        console.log('All details loaded successfully');
         pokemonRepository.getAll().forEach(function (pokemon) {
           if (pokemon) {
           addListItem(pokemon);
@@ -137,7 +116,6 @@ let pokemonRepository = (function () {
         return response.json();
       })
       .then(function (details) {
-        console.log('Pokemon Details', details);
         if(!details.sprites || !details.sprites.front_default) {
           console.error('Sprites not found', details.name);
           return null;
@@ -162,7 +140,6 @@ let pokemonRepository = (function () {
     showModal(pokemon.name, `Height: ${pokemon.height}`, pokemon.imageUrl);
   }
   
-
   return {
     add: add,
     getAll: getAll,
@@ -171,10 +148,8 @@ let pokemonRepository = (function () {
     loadDetails: loadDetails,
     showDetails: showDetails
   }
-
 }
 )();
-
 
 pokemonRepository.loadList().then(function () {
   // Now the data is loaded!
