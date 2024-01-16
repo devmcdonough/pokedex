@@ -13,9 +13,7 @@ let pokemonRepository = (function () {
       "name" in pokemon
     ) {
       pokemonList.push(pokemon);
-    } else {
-      console.log("pokemon is not correct");
-    }
+    } 
   }
 
   // Gets value of array
@@ -75,13 +73,11 @@ let pokemonRepository = (function () {
         return response.json();
       })
       .then(function (json) {
-        console.log('API Response', json);
         return Promise.all(json.results.map(function (item) {
           return loadDetails(item.url);      
         }));
       })
       .then(function () {
-        console.log('All details loaded successfully');
         pokemonRepository.getAll().forEach(function (pokemon) {
           if (pokemon) {
           addListItem(pokemon);
@@ -122,7 +118,6 @@ let pokemonRepository = (function () {
         return response.json();
       })
       .then(function (details) {
-        console.log('Pokemon Details', details);
         if(!details.sprites || !details.sprites.front_default) {
           console.error('Sprites not found', details.name);
           return null;
