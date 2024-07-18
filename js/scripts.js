@@ -90,16 +90,27 @@ let pokemonRepository = (function () {
   }
 
   function addListItem(pokemon) {
-    let pokemonListContainer = document.querySelector('.pokemon-list');
-    let listItem = document.createElement("li");
-    listItem.classList.add('list-group-item');
+    let pokemonListContainer = document.querySelector('.pokemon-container');
+    let listItem = document.createElement("div");
+    listItem.classList.add('pokemon-list-item');
     let button = document.createElement("button");
     button.setAttribute("data-toggle", "modal");
     button.setAttribute("data-target", "#exampleModalCenter")
     button.innerText = pokemon.name;
     button.classList.add("btn");
+     // Create image element
+    let imageElement = document.createElement('img');
+    
+    // Edit img src with pokemonImage URL
+    imageElement.src = pokemon.imageUrl;
+
+    // Append image to button
+    imageElement.classList.add('img-fluid');
+    button.prepend(imageElement);
+
     listItem.appendChild(button);
     pokemonListContainer.appendChild(listItem);
+   
     button.addEventListener('click', function () {
       if (pokemon.detailsUrl) {
       showDetails(pokemon);
