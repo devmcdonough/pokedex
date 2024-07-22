@@ -9,6 +9,12 @@
   width: 80%;
 }
 
+.header-image {
+  width: 280px;
+  height: auto;
+  margin-top: 16px;
+}
+
 .pokemon-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Adjusted to display 3 items per row */
@@ -21,6 +27,8 @@
   border: #0075BE 5px solid;
   border-radius: 8px;
   padding: 8px;
+  display: flex;
+  justify-content: center;
 }
 
 .pokemon-list-item button {
@@ -28,7 +36,7 @@
   align-items: center;
   flex-direction: column;
   width: 100%;
-  background-color: #f9f9f9;
+  background-color: #fff;
 }
 
 body {
