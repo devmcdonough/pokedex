@@ -11,8 +11,10 @@
 
 .pokemon-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr); /* Adjusted to display 3 items per row */
   gap: 12px;
+  list-style-type: none;
+  padding: 0;
 }
 
 .pokemon-list-item {
@@ -65,11 +67,6 @@ body {
   border: #545454 2px solid;
   padding: 8px 16px;
   border-radius: 8px;
-}
-
-.pokemon-list {
-  list-style-type: none;
-  padding: 0;
 }
 
 @media screen and (min-width: 601px) and (max-width: 760px) {
